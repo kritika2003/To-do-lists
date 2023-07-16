@@ -1,0 +1,35 @@
+<%-include("header")-%>
+<header>
+  <h1>To Do List</h1>
+</header>
+<div class="container">
+<% list?.map((listItem)=>{ %>
+<div class="todo_container">
+<div class="box" id="header">
+<h1><%= listItem.name %></h1>
+</div>
+<% listItem?.items?.forEach(function(item){ %> 
+<form action="/delete/<%= listItem.name %>/<%= item.id %>" method="post">
+<div class="item">
+  <input type="checkbox" name="checkbox" value="<%=item.id%>" onchange="this.form.submit()">
+   <p><%= item.name  %></p>
+</div>
+<input type="hidden" name="listname" value="<%=listItem.name %>"></input>
+</form>
+<% }) %>
+</div>
+<% }) %>
+</div>
+
+<form class="item" action="/" method="post">
+<div>
+  <label for="">List Name</label>
+  <input type="text" name="listname" placeholder="listname" autocomplete="off">
+  <label for="">New Item</label>
+  <input type="text" name="newitem" placeholder="newitem" autocomplete="off">
+  <button type="submit" name="list">+</button>
+</div>
+
+</form>
+    
+    <%-include("footer")-%>
